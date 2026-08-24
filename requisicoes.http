@@ -1,26 +1,27 @@
-### Listar todos os filmes
+### Listar todos os filmes (GET)
 GET http://localhost:3000/filmes
-### Cadastrar um filme novo
+
+### Adicionar novo filme (POST)
 POST http://localhost:3000/filmes
 Content-Type: application/json
 
 {
-    "title": "Matrix",
+    "title": "Homem-Aranha: Sem Volta para Casa",
     "genre": "Ação",
-    "duration": 136,
-    "age_rating": "14"
+    "duration": 148,
+    "age_rating": "12"
 }
 
-### Editar um filme (Exemplo com o ID 1)
+### Editar filme (PUT)
 PUT http://localhost:3000/filmes/1
 Content-Type: application/json
 
 {
-    "title": "O Senhor dos Anéis: A Sociedade do Anel",
+    "title": "O Senhor dos Anéis (Versão Estendida)",
     "genre": "Fantasia",
-    "duration": 178,
+    "duration": 201,
     "age_rating": "12"
 }
 
-### Deletar um filme (Exemplo com o ID 12)
+### Apagar filme (DELETE)
 DELETE http://localhost:3000/filmes/12

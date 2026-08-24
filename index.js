@@ -1,20 +1,23 @@
+
 const express = require('express');
 const mysql = require('mysql2/promise');
+const cors = require('cors');
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
-
+// Conexão com o MySQL
 const db = mysql.createPool({
     host: 'benserverplex.ddns.net',
     user: 'alunos',
-    password: 'senhaAlunos', 
-    database: 'alunos_filmes12' 
+    password: 'senhaAlunos', // Subtitua pela sua senha do MySQL
+    database: 'alunos_filmes12'
 });
 
-const TABELA = 'alunos_filmes12'; 
+const TABELA = 'alunos_filmes12';
 
-
+// 1. READ - Listar todos os filmes
 app.get('/filmes', async (req, res) => {
     try {
         const [rows] = await db.query(`SELECT * FROM ${TABELA}`);
@@ -24,7 +27,7 @@ app.get('/filmes', async (req, res) => {
     }
 });
 
-
+// 2. CREATE - Cadastrar novo filme
 app.post('/filmes', async (req, res) => {
     const { title, genre, duration, age_rating } = req.body;
     try {
@@ -32,12 +35,13 @@ app.post('/filmes', async (req, res) => {
             `INSERT INTO ${TABELA} (title, genre, duration, age_rating) VALUES (?, ?, ?, ?)`,
             [title, genre, duration, age_rating]
         );
-        res.status(201).json({ message: 'Filme inserido com sucesso!', id: result.insertId });
+        res.status(201).json({ message: 'Filme criado com sucesso!', id: result.insertId });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
+// 3. UPDATE - Editar informações de um filme
 app.put('/filmes/:id', async (req, res) => {
     const { id } = req.params;
     const { title, genre, duration, age_rating } = req.body;
@@ -52,7 +56,7 @@ app.put('/filmes/:id', async (req, res) => {
     }
 });
 
-
+// 4. DELETE - Apagar um filme
 app.delete('/filmes/:id', async (req, res) => {
     const { id } = req.params;
     try {

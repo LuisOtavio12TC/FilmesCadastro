@@ -1,3 +1,7 @@
+const API_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+    ? "http://localhost:3000/filmes"
+    : "https://filmes-cadastro-5o2u.vercel.app/filmes";
+
 async function buscarFilmes() {
     const tabelaBody = document.getElementById("tabela-filmes");
 

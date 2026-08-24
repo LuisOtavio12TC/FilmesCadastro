@@ -1,0 +1,26 @@
+### Listar todos os filmes
+GET http://localhost:3000/filmes
+### Cadastrar um filme novo
+POST http://localhost:3000/filmes
+Content-Type: application/json
+
+{
+    "title": "Matrix",
+    "genre": "Ação",
+    "duration": 136,
+    "age_rating": "14"
+}
+
+### Editar um filme (Exemplo com o ID 1)
+PUT http://localhost:3000/filmes/1
+Content-Type: application/json
+
+{
+    "title": "O Senhor dos Anéis: A Sociedade do Anel",
+    "genre": "Fantasia",
+    "duration": 178,
+    "age_rating": "12"
+}
+
+### Deletar um filme (Exemplo com o ID 12)
+DELETE http://localhost:3000/filmes/12
